@@ -18,8 +18,8 @@ export default function RootLayout() {
         "roboto-bold": require("../assets/fonts/roboto/Roboto-Bold.ttf"),
     });
     return (
-        <Stack>
-            <Stack.Screen name="index" />
+        <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="welcome" />
         </Stack>
     );
 }
