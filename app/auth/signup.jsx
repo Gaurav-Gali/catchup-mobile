@@ -4,16 +4,33 @@ import {
     Text,
     SafeAreaView,
     ScrollView,
-    KeyboardAvoidingView
+    KeyboardAvoidingView,
 } from "react-native";
-import React from "react";
+import React, { useRef, useState } from "react";
 import BackSvg from "../../assets/svg/BackSvg";
 import { useRouter } from "expo-router";
 import { TouchableOpacity } from "react-native";
 const SignUp = () => {
     const router = useRouter();
+    // Refs
+    const nameRef = useRef();
+    const emailRef = useRef();
+    const passwordRef = useRef();
+    const confirmPasswordRef = useRef();
+    // State
+    const [loading, setLoading] = useState(false);
+
+    // Handlers
+    const handleSignUp = () => {
+        setLoading(true);
+        console.log(nameRef.current, emailRef.current, passwordRef.current);
+        setLoading(false);
+    };
     return (
-        <KeyboardAvoidingView behavior="padding" className="flex-1 h-full bg-purple-50">
+        <KeyboardAvoidingView
+            behavior="padding"
+            className="flex-1 h-full bg-purple-50"
+        >
             <ScrollView
                 showsVerticalScrollIndicator={false}
                 className="flex-1 h-full bg-purple-50"
@@ -32,29 +49,35 @@ const SignUp = () => {
                             Let's Get You Started
                         </Text>
                         <TextInput
+                            onChangeText={(value) => (nameRef.current = value)}
                             className="bg-violet-100 font-[roboto] text-gray-500 placeholder:text-gray-400 p-5 rounded-xl w-full"
                             placeholder="Enter your name"
                         />
                         <TextInput
+                            onChangeText={(value) => (emailRef.current = value)}
                             className="bg-violet-100 font-[roboto] text-gray-500 placeholder:text-gray-400 p-5 rounded-xl w-full"
                             placeholder="Enter your email"
                         />
                         <TextInput
+                            onChangeText={(value) =>
+                                (passwordRef.current = value)
+                            }
                             className="bg-violet-100 font-[roboto] text-gray-500 placeholder:text-gray-400 p-5 rounded-xl w-full"
                             secureTextEntry={true}
                             placeholder="Enter your password"
                         />
                         <TextInput
+                            onChangeText={(value) => (confirmPasswordRef.current = value)}
                             className="bg-violet-100 font-[roboto] text-gray-500 placeholder:text-gray-400 p-5 rounded-xl w-full"
                             secureTextEntry={true}
                             placeholder="Confirm your password"
                         />
                         <TouchableOpacity
-                            onPress={() => router.push("auth/signup")}
+                            onPress={() => handleSignUp()}
                             className="bg-violet-500 font-[roboto] p-4 pl-5 shadow-md shadow-purple-200 rounded-2xl w-full"
                         >
                             <Text className="text-center font-[roboto-medium] text-md p-[5px] text-violet-50">
-                                Login
+                                Sign Up
                             </Text>
                         </TouchableOpacity>
                         <View className="flex flex-row justify-center gap-1">

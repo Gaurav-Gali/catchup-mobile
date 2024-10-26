@@ -1,11 +1,24 @@
-import { View, TextInput, Text, SafeAreaView, ScrollView } from "react-native";
-import React from "react";
+import { View, TextInput, Text, SafeAreaView, ActivityIndicator } from "react-native";
+import React, { useRef, useState } from "react";
 import BackSvg from "../../assets/svg/BackSvg";
 import { useRouter } from "expo-router";
 import { TouchableOpacity } from "react-native";
 import LoginSvg from "../../assets/svg/LoginSvg";
 const Login = () => {
     const router = useRouter();
+    // Refs
+    const emailRef = useRef("");
+    const passwordRef = useRef("");
+    // States
+    const [loading, setLoading] = useState(false);
+
+    // Handlers
+    const handleLogin = async () => {
+        setLoading(true);
+        console.log(emailRef.current);
+        console.log(passwordRef.current);
+        setLoading(false);
+    };
     return (
         <SafeAreaView className="flex-1 h-full bg-purple-50">
             {/* Header */}
@@ -21,21 +34,34 @@ const Login = () => {
                     Welcome Back
                 </Text>
                 <TextInput
+                    onChangeText={(value) => (emailRef.current = value)}
                     className="bg-violet-100 font-[roboto] text-gray-500 placeholder:text-gray-400 p-5 rounded-xl w-full"
                     placeholder="Enter your email"
                 />
-                <TextInput
-                    className="bg-violet-100 font-[roboto] text-gray-500 placeholder:text-gray-400 p-5 rounded-xl w-full"
-                    secureTextEntry={true}
-                    placeholder="Enter your password"
-                />
+                <View className="w-full">
+                    <TextInput
+                        onChangeText={(value) => (passwordRef.current = value)}
+                        className="bg-violet-100 font-[roboto] text-gray-500 placeholder:text-gray-400 p-5 rounded-xl w-full"
+                        secureTextEntry={true}
+                        placeholder="Enter your password"
+                    />
+                    <TouchableOpacity className="w-full p-1 pb-0 flex items-end">
+                        <Text className="font=[roboto] text-gray-500 text-sm">
+                            Forgot Password?
+                        </Text>
+                    </TouchableOpacity>
+                </View>
                 <TouchableOpacity
-                    onPress={() => router.push("auth/signup")}
+                    onPress={() => handleLogin()}
                     className="bg-violet-500 font-[roboto] p-4 pl-5 shadow-md shadow-purple-200 rounded-2xl w-full"
                 >
-                    <Text className="text-center font-[roboto-medium] text-md p-[5px] text-violet-50">
-                        Login
-                    </Text>
+                    {loading ? (
+                        <ActivityIndicator size={25} color="white" />
+                    ) : (
+                        <Text className="text-center font-[roboto-medium] text-md p-[5px] text-violet-50">
+                            Login
+                        </Text>
+                    )}
                 </TouchableOpacity>
                 <View className="flex flex-row justify-center gap-1">
                     <Text className="text-center font-[roboto] text-gray-700">
