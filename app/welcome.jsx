@@ -36,7 +36,7 @@ const welcome = () => {
                         Already have an account?
                     </Text>
                     <TouchableOpacity onPress={() => router.push("auth/login")}>
-                        <Text className="text-center font-[roboto] text-violet-600">
+                        <Text className="text-center font-[roboto] text-violet-500">
                             Login
                         </Text>
                     </TouchableOpacity>
