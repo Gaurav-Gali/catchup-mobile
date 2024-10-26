@@ -1,9 +1,20 @@
-import { View, TextInput, Text, SafeAreaView, ActivityIndicator } from "react-native";
+import {
+    View,
+    TextInput,
+    Text,
+    SafeAreaView,
+    ActivityIndicator,
+    Alert,
+} from "react-native";
 import React, { useRef, useState } from "react";
 import BackSvg from "../../assets/svg/BackSvg";
 import { useRouter } from "expo-router";
 import { TouchableOpacity } from "react-native";
 import LoginSvg from "../../assets/svg/LoginSvg";
+
+// Supabase imports
+import { supabase } from "../../lib/supabase";
+
 const Login = () => {
     const router = useRouter();
     // Refs
@@ -15,8 +26,23 @@ const Login = () => {
     // Handlers
     const handleLogin = async () => {
         setLoading(true);
-        console.log(emailRef.current);
-        console.log(passwordRef.current);
+        if (!emailRef.current || !passwordRef.current) {
+            Alert.alert("Couldn't Login", "Please fill in all the fields");
+        } else {
+            // Trimming the white spaces if any
+            const email = emailRef.current.trim();
+            const password = passwordRef.current.trim();
+
+            // Implementing Login
+            const { error } = await supabase.auth.signInWithPassword({
+                email,
+                password,
+            });
+
+            if (error) {
+                Alert.alert("Couldn't Login", error.message);
+            }
+        }
         setLoading(false);
     };
     return (
