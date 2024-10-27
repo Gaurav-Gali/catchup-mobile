@@ -1,18 +1,11 @@
 {
+  "compilerOptions": {},
   "extends": "expo/tsconfig.base",
-  "compilerOptions": {
-    "strict": true,
-    "paths": {
-      "@/*": [
-        "./*"
-      ]
-    }
-  },
   "include": [
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     "nativewind-env.d.ts"
-, "assets/svg/SplashSvg.jsx", "app/_layout.jsx"  ]
+  ]
 }

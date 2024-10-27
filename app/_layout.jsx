@@ -3,13 +3,13 @@ import { Stack, useRouter } from "expo-router";
 import { useFonts } from "expo-font";
 
 // Context Imports
-import { AuthProvider, useAuth } from "@/contexts/AuthContext";
-import { supabase } from "@/lib/supabase";
+import { AuthProvider, useAuth } from "../contexts/AuthContext";
+import { supabase } from "../lib/supabase";
 
-import "@/global.css";
+import "../global.css";
 import { useEffect } from "react";
 
-import { getUserData } from "@/functions/getUserData";
+import { getUserData } from "../functions/getUserData";
 
 const _layout = () => {
     return (
@@ -57,7 +57,11 @@ const RootLayout = () => {
         }
     };
 
-    return <Stack screenOptions={{ headerShown: false }} />;
+    return (
+        <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="welcome" />
+        </Stack>
+    );
 };
 
 export default _layout;

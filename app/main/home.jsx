@@ -8,7 +8,7 @@ import {
 import React from "react";
 import { supabase } from "../../lib/supabase";
 
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 
 const home = () => {
     const { user } = useAuth();
@@ -21,7 +21,7 @@ const home = () => {
     };
     return (
         <SafeAreaView>
-            <Text>Welcome, {user.name}</Text>
+            <Text>Welcome, {user?.name}</Text>
             {/* Temporary Logout Button */}
             <TouchableOpacity onPress={() => handleLogout()}>
                 <Text>Logout</Text>

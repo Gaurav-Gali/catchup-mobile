@@ -84,7 +84,7 @@ const SignUp = () => {
                         <BackSvg color="#8b5cf6" size={24} />
                     </TouchableOpacity>
                     {/* Form */}
-                    <View className="p-3 pl-7 pr-7 flex-1 gap-5 mt-32 items-center justify-center">
+                    <View className="p-3 pl-7 pr-7 flex-1 gap-5 mt-20 items-center justify-center">
                         <Text className="font-[playfair-medium] text-gray-700 text-3xl">
                             Let's Get You Started
                         </Text>
