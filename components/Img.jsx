@@ -14,8 +14,8 @@ const Img = (props) => {
                 }
                 source={
                     props.src
-                        ? getSupabaseFilePath(props.src)
-                        : "https://picsum.photos/seed/60/3000/2000"
+                        ? (props.preview ? props.src : getSupabaseFilePath(props.src))
+                        : `https://picsum.photos/seed/696/3000/2000`
                 }
                 contentFit="cover"
                 transition={1000}

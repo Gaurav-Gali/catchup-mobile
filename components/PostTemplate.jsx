@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import Img from "./Img";
+import { Video } from "expo-av";
 import MoreSvg from "../assets/svg/MoreSvg";
 import HeartSvg from "../assets/svg/HeartSvg";
 import CommentSvg from "../assets/svg/CommentSvg";
@@ -30,10 +31,30 @@ const PostTemplate = ({ props }) => {
                     <MoreSvg size={24} color="#374151" />
                 </TouchableOpacity>
             </View>
-            {/* Post Image */}
+            {/* Post Media */}
             <View>
-                <Img styl="h-[230px]" radius={10} />
+                <Img src={props?.uri} styl="h-[230px]" radius={10} />
             </View>
+            {/* {props?.type === "image" ? (
+                <View>
+                    <Img src={props?.uri} styl="h-[230px]" radius={10} />
+                </View>
+            ) : (
+                <View>
+                    <Video
+                        style={{
+                            flex: 1,
+                            height: 230,
+                            borderRadius: 10,
+                        }}
+                        source={{ uri: props?.uri }}
+                        useNativeControls
+                        resizeMode="cover"
+                        isLooping
+                    />
+                </View>
+            )} */}
+
             {/* Post Caption */}
             <View className="p-1 pt-0 pb-0">
                 <Text className="font-[roboto] text-[14px] text-gray-700">

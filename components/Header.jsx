@@ -9,30 +9,23 @@ import NotificationSvg from "../assets/svg/NotificationSvg";
 import AvatarSvg from "../assets/svg/AvatarSvg";
 import CreateSvg from "../assets/svg/CreateSvg";
 
+import { useAuth } from "../contexts/AuthContext";
+
 const Header = ({ create, notification, avatar }) => {
     const colorSelected = "#374151";
     const router = useRouter();
 
-    const ICON_SIZE = 22;
+    const ICON_SIZE = 24;
 
-    // States
-    const [hasImage, setHasImage] = useState(false);
+    const User = useAuth().user;
     return (
         <View className="flex-row items-center justify-between p-5 pt-3">
             <TouchableOpacity onPress={() => router.replace("main/home")}>
-                <Text className="font-[playfair-medium] text-[22px] text-gray-600">
+                <Text className="font-[playfair-medium] text-[24px] text-gray-600">
                     CatchUp
                 </Text>
             </TouchableOpacity>
             <View className="flex-row gap-5 items-center justify-center">
-                {/* <TouchableOpacity
-                    onPress={() => router.push("main/CreateScreen")}
-                >
-                    <CreateSvg
-                        size={ICON_SIZE}
-                        color={create ? colorSelected : "#6B7280"}
-                    />
-                </TouchableOpacity> */}
                 <TouchableOpacity
                     onPress={() => router.push("main/NotificationsScreen")}
                 >
@@ -44,9 +37,10 @@ const Header = ({ create, notification, avatar }) => {
                 <TouchableOpacity
                     onPress={() => router.push("main/ProfileScreen")}
                 >
-                    {hasImage ? (
+                    {User?.image ? (
                         <Img
-                            styl="h-[24px] w-[24px] border border-purple-200 rounded-full"
+                            src={User.image}
+                            styl="h-[32px] w-[32px] border border-purple-200 rounded-full"
                             radius={200}
                         />
                     ) : (
