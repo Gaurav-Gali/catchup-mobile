@@ -25,14 +25,14 @@ const Header = ({ create, notification, avatar }) => {
                 </Text>
             </TouchableOpacity>
             <View className="flex-row gap-5 items-center justify-center">
-                <TouchableOpacity
+                {/* <TouchableOpacity
                     onPress={() => router.push("main/CreateScreen")}
                 >
                     <CreateSvg
                         size={ICON_SIZE}
                         color={create ? colorSelected : "#6B7280"}
                     />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 <TouchableOpacity
                     onPress={() => router.push("main/NotificationsScreen")}
                 >

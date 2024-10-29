@@ -7,6 +7,7 @@ import SafeView from "../../components/SafeView";
 // Component Imports
 import Header from "../../components/Header";
 import PostTemplate from "../../components/PostTemplate";
+import CreatePost from "../../components/CreatePost";
 
 const home = () => {
     const handleLogout = async () => {
@@ -20,14 +21,14 @@ const home = () => {
         <SafeView>
             {/* Header */}
             <Header />
-            {/* Body */}
-            {
-                Array(10).fill().map((post) => {
-                    return (
-                        <PostTemplate />
-                    )
-                })
-            }
+            {/* Create Post */}
+            <CreatePost />
+            {/* Posts */}
+            {Array(10)
+                .fill()
+                .map((post) => {
+                    return <PostTemplate key={post} />;
+                })}
             <PostTemplate />
         </SafeView>
     );
