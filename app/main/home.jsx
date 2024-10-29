@@ -1,32 +1,35 @@
-import {
-    View,
-    SafeAreaView,
-    Text,
-    TouchableOpacity,
-    Alert,
-} from "react-native";
+import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import React from "react";
 import { supabase } from "../../lib/supabase";
 
-import { useAuth } from "../../contexts/AuthContext";
+import SafeView from "../../components/SafeView";
+
+// Component Imports
+import Header from "../../components/Header";
+import PostTemplate from "../../components/PostTemplate";
 
 const home = () => {
-    const { user } = useAuth();
-
     const handleLogout = async () => {
         const { error } = await supabase.auth.signOut();
         if (error) {
             Alert.alert("Couldn't Log Out", error.message);
         }
     };
+
     return (
-        <SafeAreaView>
-            <Text>Welcome, {user?.name}</Text>
-            {/* Temporary Logout Button */}
-            <TouchableOpacity onPress={() => handleLogout()}>
-                <Text>Logout</Text>
-            </TouchableOpacity>
-        </SafeAreaView>
+        <SafeView>
+            {/* Header */}
+            <Header />
+            {/* Body */}
+            {
+                Array(10).fill().map((post) => {
+                    return (
+                        <PostTemplate />
+                    )
+                })
+            }
+            <PostTemplate />
+        </SafeView>
     );
 };
 
