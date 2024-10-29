@@ -1,6 +1,7 @@
 import { View, StyleSheet } from "react-native";
 import { Image } from "expo-image";
 import React from "react";
+import { getSupabaseFilePath } from "../functions/uploadMedia";
 
 const Img = (props) => {
     return (
@@ -13,8 +14,8 @@ const Img = (props) => {
                 }
                 source={
                     props.src
-                        ? props.src
-                        : "https://picsum.photos/seed/696/3000/2000"
+                        ? getSupabaseFilePath(props.src)
+                        : "https://picsum.photos/seed/60/3000/2000"
                 }
                 contentFit="cover"
                 transition={1000}

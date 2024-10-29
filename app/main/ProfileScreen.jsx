@@ -7,6 +7,11 @@ import Header from "../../components/Header";
 import Img from "../../components/Img";
 import PostTemplate from "../../components/PostTemplate";
 
+import { useRouter } from "expo-router";
+
+// Getting User
+import { useAuth } from "../../contexts/AuthContext";
+
 const ProfileScreen = () => {
     // Handlers
     const handleLogout = async () => {
@@ -15,6 +20,11 @@ const ProfileScreen = () => {
             Alert.alert("Couldn't Log Out", error.message);
         }
     };
+
+    const router = useRouter();
+
+    // User
+    const User = useAuth().user;
 
     return (
         <SafeView>
@@ -26,26 +36,36 @@ const ProfileScreen = () => {
                     <View className="bg-purple-300 p-2 rounded-full">
                         <View className="bg-purple-200 p-2 rounded-full">
                             <View className="bg-purple-100 p-2 rounded-full">
-                                <Img styl="h-[100px] w-[100px]" radius={200} />
+                                <Img
+                                    src={User.image}
+                                    styl="h-[100px] w-[100px]"
+                                    radius={200}
+                                />
                             </View>
                         </View>
                     </View>
                     <View className="flex-col gap-1 items-center justify-center">
                         <Text className="font-[roboto-bold] text-[18px] text-gray-700">
-                            User Name
+                            {User?.name && User.name}
                         </Text>
                         <Text className="font-[roboto] text-[14px] text-gray-500">
-                            example@example.com
+                            {User?.email && User.email}
                         </Text>
-                        <View className="p-2">
-                            <Text className="text-center font-[roboto] text-[14px] text-gray-700">
-                                Lorem ipsum, dolor sit amet consectetur
-                                adipisicing elit. Ipsa, quidem.
-                            </Text>
-                        </View>
+                        {User?.bio && (
+                            <View className="p-2">
+                                <Text className="text-center font-[roboto] text-[14px] text-gray-700">
+                                    {User.bio}
+                                </Text>
+                            </View>
+                        )}
                     </View>
                     <View className="w-full flex-row items-center justify-between gap-5">
-                        <TouchableOpacity className="bg-transparent flex-1 border border-gray-300 p-4 rounded-2xl">
+                        <TouchableOpacity
+                            onPress={() =>
+                                router.push("main/EditProfileScreen")
+                            }
+                            className="bg-transparent flex-1 border border-gray-300 p-4 rounded-2xl"
+                        >
                             <Text className="text-gray-700 text-center font-[roboto] text-[14px]">
                                 Edit Profile
                             </Text>
@@ -66,7 +86,7 @@ const ProfileScreen = () => {
                 {Array(10)
                     .fill()
                     .map((post) => {
-                        return <PostTemplate key={post}/>;
+                        return <PostTemplate key={post} />;
                     })}
             </View>
         </SafeView>
