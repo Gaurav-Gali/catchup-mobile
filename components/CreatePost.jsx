@@ -63,7 +63,7 @@ const CreatePost = () => {
 
     // Handlers
     const handleSubmit = async () => {
-        if (!caption && !media) {
+        if (!caption || !media) {
             Alert.alert("Couldn't Post", "Please add a caption or media");
             return;
         }

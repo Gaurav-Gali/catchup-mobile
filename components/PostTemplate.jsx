@@ -6,9 +6,11 @@ import MoreSvg from "../assets/svg/MoreSvg";
 import HeartSvg from "../assets/svg/HeartSvg";
 import CommentSvg from "../assets/svg/CommentSvg";
 import ShareSvg from "../assets/svg/ShareSvg";
+import { getSupabaseFilePath } from "../functions/uploadMedia";
 
-const PostTemplate = ({ props }) => {
+const PostTemplate = (props) => {
     const liked = !true;
+
     return (
         <View className="bg-transparent border border-gray-300 flex gap-5 m-3 p-3 rounded-xl">
             {/* Author Data */}
@@ -20,10 +22,10 @@ const PostTemplate = ({ props }) => {
                     />
                     <View>
                         <Text className="font-[roboto-medium] text-[14px] text-gray-700">
-                            User Name
+                            {props?.username}
                         </Text>
                         <Text className="font-[roboto] text-[12px] text-gray-600">
-                            Oct 29
+                            {props?.createdAt}
                         </Text>
                     </View>
                 </View>
@@ -32,34 +34,30 @@ const PostTemplate = ({ props }) => {
                 </TouchableOpacity>
             </View>
             {/* Post Media */}
-            <View>
-                <Img src={props?.uri} styl="h-[230px]" radius={10} />
-            </View>
-            {/* {props?.type === "image" ? (
+            {props?.image?.endsWith(".jpg") || props?.image?.endsWith(".png") ? (
                 <View>
-                    <Img src={props?.uri} styl="h-[230px]" radius={10} />
+                    <Img src={props?.image} styl="h-[230px]" radius={10} />
                 </View>
             ) : (
-                <View>
+                <View className="flex-1">
                     <Video
                         style={{
                             flex: 1,
                             height: 230,
                             borderRadius: 10,
                         }}
-                        source={{ uri: props?.uri }}
+                        source={{ uri: getSupabaseFilePath(props?.image) }}
                         useNativeControls
                         resizeMode="cover"
                         isLooping
                     />
                 </View>
-            )} */}
+            )}
 
             {/* Post Caption */}
             <View className="p-1 pt-0 pb-0">
                 <Text className="font-[roboto] text-[14px] text-gray-700">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Aspernatur, asperiores!
+                    {props?.body}
                 </Text>
             </View>
             {/* Post Details */}

@@ -7,9 +7,8 @@ import SafeView from "../../components/SafeView";
 import Header from "../../components/Header";
 import PostTemplate from "../../components/PostTemplate";
 import CreatePost from "../../components/CreatePost";
-
+import ShowPosts from "../../components/ShowPosts";
 const home = () => {
-
     return (
         <SafeView>
             {/* Header */}
@@ -17,12 +16,7 @@ const home = () => {
             {/* Create Post */}
             <CreatePost />
             {/* Posts */}
-            {Array(10)
-                .fill()
-                .map((post) => {
-                    return <PostTemplate key={post} />;
-                })}
-            <PostTemplate />
+            <ShowPosts />
         </SafeView>
     );
 };
